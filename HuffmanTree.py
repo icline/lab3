@@ -62,6 +62,16 @@ class HuffmanTree:
             self.preorder_traversal(node.left)
             self.preorder_traversal(node.right)
 
+    def get_codes(self, node, code=""):
+        if node is None:
+            return
+
+        if node.char is not None and len(node.char) == 1:
+            print(f'{node.char} = {code}')
+        
+        self.get_codes(node.left, code + '0')
+        self.get_codes(node.right, code + '1')
+
 if __name__ == "__main__":
     chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
     freqs = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19, 24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
@@ -70,6 +80,9 @@ if __name__ == "__main__":
 
     print('The tree in preorder is:')
     tree.preorder_traversal(root)
+    print('-----------------------------')
+
+    tree.get_codes(root)
 
 
 
