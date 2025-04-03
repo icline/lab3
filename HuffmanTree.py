@@ -56,12 +56,6 @@ class HuffmanTree:
         self.print_huffman_tree(node.left, indent, "Left: ")
         self.print_huffman_tree(node.right, indent, "Right: ")
 
-    def preorder_traversal(self, node):
-        if node is not None:
-            print(f'{node.char}: {node.freq}')
-            self.preorder_traversal(node.left)
-            self.preorder_traversal(node.right)
-
     def get_codes(self, node, code=""):
         if node is None:
             return
@@ -77,11 +71,6 @@ if __name__ == "__main__":
     freqs = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19, 24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
     tree = HuffmanTree(chars, freqs)
     root = tree.huffman_tree()
-
-    print('The tree in preorder is:')
-    tree.preorder_traversal(root)
-    print('-----------------------------')
-
     tree.get_codes(root)
 
 
