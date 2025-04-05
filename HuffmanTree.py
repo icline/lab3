@@ -1,8 +1,26 @@
 import heapq
 
 class HuffmanTree:
+    """
+    Encodes and decodes strings using Huffman Tree encoding.
+
+    Attributes:
+        - chars: List of characters to be encoded
+        - freqs: List containing the frequency of each character
+    """
 
     class Node:
+        """
+        A node to be inserted in the Huffman Encoding Tree.
+
+        Each node contains a character with a corresponding frequency as well as a left and right pointer
+
+        Attributes:
+            - char: A character
+            - freq: Frequency of the corresponding character
+            - left: Node's left pointer
+            - right: Node's right pointer
+        """
         
         def __init__(self, char=None, freq=None):
             self.char=char
@@ -22,12 +40,10 @@ class HuffmanTree:
         self.chars = chars
         self.freqs = freqs
 
-    def huffman_tree(self):
+    def huffman_tree(self) -> Node:
+        """Builds a Huffman Tree."""
         priority_queue=[self.Node(self.chars[i], self.freqs[i]) for i in range(len(self.chars))]
         heapq.heapify(priority_queue)
-
-        # for node in priority_queue:
-        #     print(f'{node.char}: {node.freq}')
 
         while len(priority_queue) > 1:
             left = heapq.heappop(priority_queue)
@@ -45,6 +61,7 @@ class HuffmanTree:
     # is built correctly. This function is not needed for the
     # final code, and can be removed.
     def print_huffman_tree(self, node, indent="", branch=""):
+        """Prints the Huffman Tree (non-preorder traversal)."""
         if node is None:
             return
         
@@ -57,6 +74,7 @@ class HuffmanTree:
         self.print_huffman_tree(node.right, indent, "Right: ")
 
     def get_codes(self, node, code=""):
+        """Prints all the character codes from the Huffman Tree."""
         if node is None:
             return
 
