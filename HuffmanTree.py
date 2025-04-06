@@ -13,7 +13,7 @@ class HuffmanTree:
         """
         A node to be inserted in the Huffman Encoding Tree.
 
-        Each node contains (testing merge conflict) a character with a corresponding frequency as well as a left and right pointer
+        Each node contains a unique character with a corresponding frequency
 
         Attributes:
             - char: A character
