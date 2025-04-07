@@ -7,7 +7,7 @@ class ErrorHandling:
 
     def validate_huffman_input(self, encoded_string):
         if not encoded_string:
-            return self.response(False, "Error: The encoded string is empty. hello")
+            return self.response(False, "Error: The encoded string is empty.")
         
         for bit in encoded_string:
             if bit not in {'0', '1'}:
@@ -73,8 +73,11 @@ class HuffmanCoder:
                 print(self.error_handler.response(False, f"Match not found in Huffman codes."))
 
         return result
+    
+chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+freqs = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19, 24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
 
-tree = HuffmanTree()
+tree = HuffmanTree(chars, freqs)
 root = tree.huffman_tree()
 code_dict = tree.get_codes_dict(root)
 

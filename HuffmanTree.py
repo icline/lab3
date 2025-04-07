@@ -18,11 +18,10 @@ class HuffmanTree:
             elif self.freq == other.freq:
                 return len(self.char) < len(other.char)
             return self.freq < other.freq
-    def __init__(self):
-        self.chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M',
-                      'N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-        self.freqs = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19,
-                      24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3] 
+        
+    def __init__(self, chars, freqs):
+        self.chars = chars
+        self.freqs = freqs 
 
     class ErrorHandling:
     
@@ -136,8 +135,10 @@ class HuffmanTree:
         return code_map
 
 if __name__ == "__main__":
+    chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+    freqs = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19, 24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
 
-    tree = HuffmanTree()
+    tree = HuffmanTree(chars, freqs)
     root = tree.huffman_tree()
 
     codes_dict = tree.get_codes_dict(root)
