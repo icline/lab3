@@ -11,6 +11,17 @@ class HuffmanTree:
     """
 
     class Node:
+        """
+        A node to be inserted in the Huffman Encoding Tree.
+
+        Each node contains a character with a corresponding frequency as well as a left and right pointer
+
+        Attributes:
+            - char: A character
+            - freq: Frequency of the corresponding character
+            - left: Node's left pointer
+            - right: Node's right pointer
+        """
         
         def __init__(self, char, freq):
             self.char = char
@@ -80,7 +91,7 @@ class HuffmanTree:
             self.check_for_zero_or_negative_frequencies(frequencies)
 
     def build_huffman_tree(self):
-
+        """Builds a Huffman Tree."""
         frequencies = dict(zip(self.chars, self.freqs))
         error_handler = self.ErrorHandling()
 
@@ -104,17 +115,17 @@ class HuffmanTree:
         # Return the root node of the Huffman tree
         return root
 
-    def print_huffman_tree(self, node, indent="", branch=""):
-        if node is None:
-            return
+    # def print_huffman_tree(self, node, indent="", branch=""):
+    #     if node is None:
+    #         return
         
-        print(indent+branch, end="")
-        if node.char is not None:
-            print(f'{node.char}: {node.freq}')
+    #     print(indent+branch, end="")
+    #     if node.char is not None:
+    #         print(f'{node.char}: {node.freq}')
     
-        indent += "    "
-        self.print_huffman_tree(node.left, indent, "Left: ")
-        self.print_huffman_tree(node.right, indent, "Right: ")
+    #     indent += "    "
+    #     self.print_huffman_tree(node.left, indent, "Left: ")
+    #     self.print_huffman_tree(node.right, indent, "Right: ")
 
     def print_preorder_traversal(self, node):
         """Prints the tree using preorder traversal as required by the lab."""
@@ -150,6 +161,7 @@ class HuffmanTree:
     #     self.get_codes(node.right, code + '1')
 
     def get_codes_dict(self, node, code="", code_map=None):
+        """Gets all of the character codes and stores them in a dictionary."""
         if code_map is None:
             code_map = {}
 

@@ -28,6 +28,7 @@ class HuffmanCoder:
         self.error_handler = ErrorHandling()
 
     def decode(self, data):
+        """Decodes a given string using the class's huffman codes."""
         data = self.error_handler.remove_spaces(data)
         validation = self.error_handler.validate_huffman_input(data)
 
@@ -54,6 +55,7 @@ class HuffmanCoder:
         return result
 
     def encode(self, input_string):
+        """Encodes a given string using the class's huffman codes."""
         cleaned_input = self.error_handler.remove_spaces(input_string)
         cleaned_input = self.error_handler.keep_only_letters(cleaned_input.upper())
 
