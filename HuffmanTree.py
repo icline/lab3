@@ -1,4 +1,5 @@
 import heapq
+from collections import namedtuple, Counter
 
 class HuffmanTree:
     """
@@ -10,23 +11,12 @@ class HuffmanTree:
     """
 
     class Node:
-        """
-        A node to be inserted in the Huffman Encoding Tree.
-
-        Each node contains a character with a corresponding frequency as well as a left and right pointer
-
-        Attributes:
-            - char: A character
-            - freq: Frequency of the corresponding character
-            - left: Node's left pointer
-            - right: Node's right pointer
-        """
         
-        def __init__(self, char=None, freq=None):
-            self.char=char
-            self.freq=freq
-            self.left=None
-            self.right=None
+        def __init__(self, char, freq):
+            self.char = char
+            self.freq = freq
+            self.left = None
+            self.right = None
 
         # Defines the Precedence
         def __lt__(self, other):
@@ -35,33 +25,86 @@ class HuffmanTree:
             elif self.freq == other.freq:
                 return len(self.char) < len(other.char)
             return self.freq < other.freq
-    
+        
     def __init__(self, chars, freqs):
         self.chars = chars
-        self.freqs = freqs
+        self.freqs = freqs 
 
-    def huffman_tree(self) -> Node:
-        """Builds a Huffman Tree."""
-        priority_queue=[self.Node(self.chars[i], self.freqs[i]) for i in range(len(self.chars))]
+    class ErrorHandling:
+    
+        class InvalidCharacterError(Exception):
+            pass
+    
+        class DuplicateCharacterError(Exception):
+            pass
+    
+        class ZeroOrNegativeFrequencyError(Exception):
+            pass
+    
+        class InvalidHuffmanTreeError(Exception):
+            pass
+    
+        def __init__(self):
+            self.response = namedtuple('Response', ['valid', 'error'], defaults=[True, None])
+
+        def check_huffman_tree(self, root):
+            """Check if the Huffman tree is valid (not None)."""
+            if root is None:
+                raise self.InvalidHuffmanTreeError("Error: The Huffman tree is empty or not built correctly.")
+            return True
+
+        def check_for_invalid_characters(self, frequencies):
+            """Ensure all characters in the frequency table are valid."""
+            for char in frequencies:
+                if not char.isalpha() or len(char) != 1:
+                    raise self.InvalidCharacterError(f"Invalid character '{char}' found in the frequency table.")
+    
+        def check_for_duplicate_characters(self, frequencies):
+            """Ensure all characters in the frequency table are unique."""
+            seen = set()
+            for char in frequencies:
+                if char in seen:
+                    raise self.DuplicateCharacterError(f"Duplicate character '{char}' found in the frequency table.")
+                seen.add(char)
+    
+        def check_for_zero_or_negative_frequencies(self, frequencies):
+            """Ensure all frequencies are positive integers."""
+            for char, freq in frequencies.items():
+                if freq <= 0:
+                    raise self.ZeroOrNegativeFrequencyError(f"Invalid frequency {freq} for character '{char}'. Frequencies must be positive.")
+    
+        def validate_frequency_table(self, frequencies):
+            """Validate the frequency table for correct characters and frequencies."""
+            self.check_for_invalid_characters(frequencies)
+            self.check_for_duplicate_characters(frequencies)
+            self.check_for_zero_or_negative_frequencies(frequencies)
+
+    def build_huffman_tree(self):
+
+        frequencies = dict(zip(self.chars, self.freqs))
+        error_handler = self.ErrorHandling()
+
+        error_handler.validate_frequency_table(frequencies)
+    
+        # Build the priority queue and the Huffman tree
+        priority_queue = [self.Node(self.chars[i], self.freqs[i]) for i in range(len(self.chars))]
         heapq.heapify(priority_queue)
-
+    
         while len(priority_queue) > 1:
             left = heapq.heappop(priority_queue)
             right = heapq.heappop(priority_queue)
-
-            combined = self.Node(left.char+right.char, left.freq + right.freq)
+            combined = self.Node(left.char + right.char, left.freq + right.freq)
             combined.left = left
             combined.right = right
             heapq.heappush(priority_queue, combined)
-
-        return priority_queue[0]
     
-    # FOR TESTING
-    # This function is just to test whether the Huffman Tree 
-    # is built correctly. This function is not needed for the
-    # final code, and can be removed.
+        root = priority_queue[0]
+        error_handler.check_huffman_tree(root)
+    
+        # Return the root node of the Huffman tree
+        return root
+
     def print_huffman_tree(self, node, indent="", branch=""):
-        """Prints the Huffman Tree (non-preorder traversal)."""
         if node is None:
             return
         
@@ -96,24 +139,63 @@ class HuffmanTree:
         # Visit right subtree
         self._preorder_recursive(node.right, result)
 
-    def get_codes(self, node, code=""):
-        """Prints all the character codes from the Huffman Tree."""
+    # def get_codes(self, node, code=""):
+    #     if node is None:
+    #         return
+
+    #     if node.char is not None and len(node.char) == 1:
+    #         print(f'{node.char} = {code}')
+        
+    #     self.get_codes(node.left, code + '0')
+    #     self.get_codes(node.right, code + '1')
+
+    def get_codes_dict(self, node, code="", code_map=None):
+        if code_map is None:
+            code_map = {}
+
         if node is None:
-            return
+            return code_map
 
         if node.char is not None and len(node.char) == 1:
-            print(f'{node.char} = {code}')
-        
-        self.get_codes(node.left, code + '0')
-        self.get_codes(node.right, code + '1')
+            code_map[code] = node.char  # Reverse mapping: code -> char
 
+        self.get_codes_dict(node.left, code + '0', code_map)
+        self.get_codes_dict(node.right, code + '1', code_map)
+
+        return code_map
+    
+    # def generate_codes(self, node=None, current_code="", codes=None):
+    #     # Initialize on first call
+    #     if node is None:
+    #         node = self.root
+    #         codes = {}
+
+    #     # Base case: if at a leaf node, assign the code
+    #     if node.char is not None:
+    #         codes[node.char] = current_code if current_code else "0"
+    #         return codes
+
+    #     # Recursively traverse left and right children
+    #     if node.left:
+    #         self.generate_codes(node.left, current_code + "0", codes)
+    #     if node.right:
+    #         self.generate_codes(node.right, current_code + "1", codes)
+
+    #     return codes
+'''
 if __name__ == "__main__":
     chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
     freqs = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19, 24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
+
     tree = HuffmanTree(chars, freqs)
     root = tree.huffman_tree()
-    tree.get_codes(root)
-    tree.print_preorder_traversal(root)
 
+    codes_dict = tree.get_codes_dict(root)
 
+    print("\nHuffman Dictionary (Code -> Letter):")
+    for code, char in codes_dict.items():
+        print(f"{code}: {char}")
+    
+    #tree.get_codes(root)
 
+'''
