@@ -6,7 +6,7 @@ class HuffmanTree:
 
     Attributes:
         - chars: List of characters to be encoded
-        - freqs: List containing the frequency of each character
+        - freqs: List containing the frequency of each character fksdjfldskj 
     """
 
     class Node:
