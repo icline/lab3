@@ -7,7 +7,7 @@ class ErrorHandling:
 
     def validate_huffman_input(self, encoded_string):
         if not encoded_string:
-            return self.response(False, "Error: The encoded string is empty.")
+            return self.response(False, "Error: The encoded string is empty. hello")
         
         for bit in encoded_string:
             if bit not in {'0', '1'}:
