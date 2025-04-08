@@ -16,38 +16,39 @@ The code is:
 Encoded:
  'Sally sells seashells by the seashore.'
  to:
- {'valid': True, 'message': '11101111100010001101101111001000010001111011100101111111101101101000010001111011000101101100111011010111001011111111011011111101000010'}
-Duration: 0.1049 milliseconds
+ 11101111100010001101101111001000010001111011100101111111101101101000010001111011000101101100111011010111001011111111011011111101000010
+Duration: 0.1191 milliseconds
 Compression Rate: 0.66%
 
 Encoded:
  'Peter Piper picked a peck of pickled peppers a peck of pickled peppers Peter Piper picked.'
  to:
- {'valid': True, 'message': '10100010100101010001010011001101000101000101001100111010001000100110011111101000101101000100111100110110100110011101000100000101001100101000101010010100010100011101111110100010110100010011110011011010011001110100010000010100110010100010101001010001010001110101000101001010100010100110011010001010001010011001110100010001001100'}
-Duration: 0.0500 milliseconds
+ 10100010100101010001010011001101000101000101001100111010001000100110011111101000101101000100111100110110100110011101000100000101001100101000101010010100010100011101111110100010110100010011110011011010011001110100010000010100110010100010101001010001010001110101000101001010100010100110011010001010001010011001110100010001001100
+Duration: 0.0487 milliseconds
 Compression Rate: 0.28%
 
 Encoded:
  'Houston, the Eagle has landed.'
  to:
- {'valid': True, 'message': '11011111101011111101001111100111100111011010010111111010100010101101111111111000011111101110110001001100'}
-Duration: 0.0181 milliseconds
+ 11011111101011111101001111100111100111011010010111111010100010101101111111111000011111101110110001001100
+Duration: 0.0202 milliseconds
 Compression Rate: 0.83%
 
 Encoded:
  'Is that your final answer?'
  to:
- {'valid': True, 'message': '1100111101001110111111110011011011111010111100001101110010111111110001111110111111000110101000'}
-Duration: 0.0150 milliseconds
+ 1100111101001110111111110011011011111010111100001101110010111111110001111110111111000110101000
+Duration: 0.0153 milliseconds
 Compression Rate: 0.96%
 
+Input: ""
 Error: No valid letters in input to encode.
 
 Decoded:
  '01011001010110011111011011'
  to:
- {'valid': True, 'message': 'EIEIOH'}
-Duration: 0.0120 milliseconds
+ EIEIOH
+Duration: 0.0121 milliseconds
 Decompression (Expansion) Rate: 61.54%
 
 Error: Line 'a1' has invalid characters
@@ -56,45 +57,125 @@ Error: Line '345' has invalid characters
 
 Error: Line 'sally3ft4&' has invalid characters
 
+Input: ""
 Error: No valid letters in input to encode.
 
+Input: ""
 Error: No valid letters in input to encode.
 
+Input: ""
 Error: No valid letters in input to encode.
 
 Decoded:
  '10110000101010011011101101100010110010101100010111000110111'
  to:
- {'valid': True, 'message': 'ZEPHYRQZULU'}
+ ZEPHYRQZULU
 Duration: 0.0148 milliseconds
 Decompression (Expansion) Rate: 27.12%
 
+Input: ""
 Error: No valid letters in input to encode.
 
+Input: "1111111101101000001010"
 No match found. Decoding stopped.
 
+Input: ""
 Error: No valid letters in input to encode.
 
+Input: "10010111111000"
 No match found. Decoding stopped.
 
+Input: ""
 Error: No valid letters in input to encode.
 
 Decoded:
  '11111110001000111111101011111011001111111000100011111000001010000001110010111'
  to:
- {'valid': True, 'message': 'ABRACADABRAMERLIN'}
-Duration: 0.0159 milliseconds
+ ABRACADABRAMERLIN
+Duration: 0.0163 milliseconds
 Decompression (Expansion) Rate: 20.78%
+
+Input: ""
+Error: No valid letters in input to encode.
+
+Input: ""
+Error: No valid letters in input to encode.
+
+Input: ""
+Error: No valid letters in input to encode.
+
+Decoded:
+ '11010111111001'
+ to:
+ CAT
+Duration: 0.0043 milliseconds
+Decompression (Expansion) Rate: 114.29%
+
+Input: ""
+Error: No valid letters in input to encode.
+
+Decoded:
+ '0110011111100111111'
+ to:
+ DATA
+Duration: 0.0048 milliseconds
+Decompression (Expansion) Rate: 84.21%
+
+Input: ""
+Error: No valid letters in input to encode.
+
+Input: "0110011111100111101"
+No match found. Decoding stopped.
+
+Input: ""
+Error: No valid letters in input to encode.
+
+Decoded:
+ '1010011110100010011100111111'
+ to:
+ PORTIA
+Duration: 0.0066 milliseconds
+Decompression (Expansion) Rate: 57.14%
+
+Input: ""
+Error: No valid letters in input to encode.
+
+Decoded:
+ '11001111011111110000100001000111111'
+ to:
+ ISABELLA
+Duration: 0.0081 milliseconds
+Decompression (Expansion) Rate: 45.71%
+
+Input: ""
+Error: No valid letters in input to encode.
+
+Decoded:
+ '001001000110011110100111001011111111'
+ to:
+ KRISTINA
+Duration: 0.0080 milliseconds
+Decompression (Expansion) Rate: 44.44%
+
+Input: ""
+Error: No valid letters in input to encode.
+
+Decoded:
+ '101011000111110100000010'
+ to:
+ GRAEME
+Duration: 0.0062 milliseconds
+Decompression (Expansion) Rate: 66.67%
 
 Total Original Bytes to Encode: 184
 Total Original Bits to Encode: 1472
 Total Compressed Bits: 8
 Overall Compression Rate: 0.54%
 
-Total Original Bits to Decode: 162
-Total Final Decompressed Bytes: 6
-Total Final Decompressed Bits: 48
-Overall Decompression (Expansion) Rate: 29.63%
+Total Original Bits to Decode: 318
+Total Final Decompressed Bytes: 18
+Total Final Decompressed Bits: 144
+Overall Decompression (Expansion) Rate: 45.28%
 
-Total Program Duration: 0.2309 milliseconds
+Total Program Duration: 0.2843 milliseconds
 
