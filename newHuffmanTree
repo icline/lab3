@@ -1,27 +1,82 @@
-def __lt__(self, other):
+from HuffmanTree import HuffmanTree
+
+class newHuffmanTree(HuffmanTree):
     """
-    Modified comparison protocol for priority queue ordering.
-    
-    This protocol uses multiple factors to determine node priority:
-    1. First prioritize by character length (shorter strings first)
-    2. Then by frequency (lower frequencies first)
-    3. If both are equal, compare the first character alphabetically
-    4. Finally consider the tree height (balance factor)
-    
-    This results in a different tree structure than the standard implementation.
+    Modified Huffman Tree that extends the original HuffmanTree class.
+    Implements a different protocol for node comparison during tree construction.
     """
-    # First prioritize by character length (encourages grouping single characters)
-    if len(self.char) != len(other.char):
-        return len(self.char) < len(other.char)
     
-    # Then by frequency (standard Huffman behavior)
-    if self.freq != other.freq:
-        return self.freq < other.freq
+    class Node(HuffmanTree.Node):
+        """
+        Modified Node class that overrides the __lt__ method with a different comparison protocol.
+        """
+        
+        def __init__(self, char, freq):
+            super().__init__(char, freq)
+            self.height = 0  # Additional attribute to track subtree height
+        
+        def __lt__(self, other):
+            """
+            Modified comparison protocol for priority queue ordering.
+            
+            This protocol uses multiple factors to determine node priority:
+            1. First prioritize by character length (shorter strings first)
+            2. Then by frequency (lower frequencies first)
+            3. If both are equal, compare the first character alphabetically
+            4. Finally consider the tree height (balance factor)
+            
+            This results in a different tree structure than the standard implementation.
+            """
+            # First prioritize by character length (encourages grouping single characters)
+            if len(self.char) != len(other.char):
+                return len(self.char) < len(other.char)
+            
+            # Then by frequency (standard Huffman behavior)
+            if self.freq != other.freq:
+                return self.freq < other.freq
+            
+            # If lengths and frequencies are equal, compare alphabetically to ensure deterministic behavior
+            # Consider only the first character in each string for comparison
+            if self.char and other.char:
+                return self.char[0].lower() < other.char[0].lower()
+            
+            # Use tree height as a final tiebreaker to create more balanced trees
+            # Need to check hasattr because the original Node class doesn't have this attribute
+            if hasattr(self, 'height') and hasattr(other, 'height'):
+                return self.height < other.height
+                
+            return True  # Default case
     
-    # If lengths and frequencies are equal, compare alphabetically to ensure deterministic behavior
-    # Consider only the first character in each string for comparison
-    if self.char and other.char:
-        return self.char[0].lower() < other.char[0].lower()
+    def build_huffman_tree(self):
+        """
+        Override the build_huffman_tree method to use the modified Node class
+        and track height information during tree construction.
+        """
+        frequencies = dict(zip(self.chars, self.freqs))
+        error_handler = self.ErrorHandling()
+
+        error_handler.validate_frequency_table(frequencies)
     
-    # As a final tiebreaker, prefer shorter trees to create more balanced trees
-    return self.height < other.height
+        # Build the priority queue with the modified nodes
+        priority_queue = [self.Node(self.chars[i], self.freqs[i]) for i in range(len(self.chars))]
+        import heapq
+        heapq.heapify(priority_queue)
+    
+        while len(priority_queue) > 1:
+            left = heapq.heappop(priority_queue)
+            right = heapq.heappop(priority_queue)
+            
+            combined = self.Node(left.char + right.char, left.freq + right.freq)
+            combined.left = left
+            combined.right = right
+            
+            # Update the height information
+            if hasattr(left, 'height') and hasattr(right, 'height'):
+                combined.height = max(left.height, right.height) + 1
+            
+            heapq.heappush(priority_queue, combined)
+    
+        root = priority_queue[0]
+        error_handler.check_huffman_tree(root)
+    
+        return root
