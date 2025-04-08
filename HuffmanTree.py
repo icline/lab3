@@ -115,23 +115,11 @@ class HuffmanTree:
         # Return the root node of the Huffman tree
         return root
 
-    # def print_huffman_tree(self, node, indent="", branch=""):
-    #     if node is None:
-    #         return
-        
-    #     print(indent+branch, end="")
-    #     if node.char is not None:
-    #         print(f'{node.char}: {node.freq}')
-    
-    #     indent += "    "
-    #     self.print_huffman_tree(node.left, indent, "Left: ")
-    #     self.print_huffman_tree(node.right, indent, "Right: ")
-
     def print_preorder_traversal(self, node):
         """Prints the tree using preorder traversal as required by the lab."""
         result = []
         self._preorder_recursive(node, result)
-        print("The tree in preorder is:", ", ".join(result))
+        return result
 
     def _preorder_recursive(self, node, result):
         """
@@ -150,16 +138,6 @@ class HuffmanTree:
         # Visit right subtree
         self._preorder_recursive(node.right, result)
 
-    # def get_codes(self, node, code=""):
-    #     if node is None:
-    #         return
-
-    #     if node.char is not None and len(node.char) == 1:
-    #         print(f'{node.char} = {code}')
-        
-    #     self.get_codes(node.left, code + '0')
-    #     self.get_codes(node.right, code + '1')
-
     def get_codes_dict(self, node, code="", code_map=None):
         """Gets all of the character codes and stores them in a dictionary."""
         if code_map is None:
@@ -175,39 +153,3 @@ class HuffmanTree:
         self.get_codes_dict(node.right, code + '1', code_map)
 
         return code_map
-    
-    # def generate_codes(self, node=None, current_code="", codes=None):
-    #     # Initialize on first call
-    #     if node is None:
-    #         node = self.root
-    #         codes = {}
-
-    #     # Base case: if at a leaf node, assign the code
-    #     if node.char is not None:
-    #         codes[node.char] = current_code if current_code else "0"
-    #         return codes
-
-    #     # Recursively traverse left and right children
-    #     if node.left:
-    #         self.generate_codes(node.left, current_code + "0", codes)
-    #     if node.right:
-    #         self.generate_codes(node.right, current_code + "1", codes)
-
-    #     return codes
-'''
-if __name__ == "__main__":
-    chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-    freqs = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19, 24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
-
-    tree = HuffmanTree(chars, freqs)
-    root = tree.huffman_tree()
-
-    codes_dict = tree.get_codes_dict(root)
-
-    print("\nHuffman Dictionary (Code -> Letter):")
-    for code, char in codes_dict.items():
-        print(f"{code}: {char}")
-    
-    #tree.get_codes(root)
-
-'''

@@ -33,8 +33,7 @@ class HuffmanCoder:
         validation = self.error_handler.validate_huffman_input(data)
 
         if not validation["valid"]:
-            print(validation["message"])
-            return ""
+            return self.error_handler.response(False, validation["message"])
 
         result = ""
         start_index = 0
@@ -49,10 +48,9 @@ class HuffmanCoder:
                     start_index += length
                     break
             else:
-                print(self.error_handler.response(False, f"No match found. Decoding stopped."))
-                return None
+                return self.error_handler.response(False, f"No match found. Decoding stopped.\n\n")
 
-        return result
+        return self.error_handler.response(True, result)
 
     def encode(self, input_string):
         """Encodes a given string using the class's huffman codes."""
@@ -60,8 +58,7 @@ class HuffmanCoder:
         cleaned_input = self.error_handler.keep_only_letters(cleaned_input.upper())
 
         if not cleaned_input:
-            print(self.error_handler.response(False, "Error: No valid letters in input to encode."))
-            return None
+            return self.error_handler.response(False, "Error: No valid letters in input to encode.\n\n")
 
         result = ""
         for char in cleaned_input:
@@ -72,26 +69,6 @@ class HuffmanCoder:
                     found = True
                     break
             if not found:
-                print(self.error_handler.response(False, f"Match not found in Huffman codes."))
+                return self.error_handler.response(False, f"Match not found in Huffman codes.\n\n")
 
-        return result
-
-'''
-chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-freqs = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19, 24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
-
-tree = HuffmanTree(chars, freqs)
-root = tree.huffman_tree()
-code_dict = tree.get_codes_dict(root)
-
-coder = HuffmanCoder(code_dict)
-
-#TESTING ONLY
-encoded_string = '0110011111100111111'
-
-decoded_string = coder.decode(encoded_string)
-print(f"Decoded string: {decoded_string}")
-
-encoded_string = coder.encode(decoded_string)
-print(f"Encoded string: {encoded_string}")
-'''
+        return self.error_handler.response(True, result)
