@@ -103,6 +103,7 @@ def main():
 
 
                 if encoded['valid'] is False:
+                    output_file.write(f'Input: "{line}"\n')
                     output_file.write(encoded['message'])
                     continue
 
@@ -126,7 +127,7 @@ def main():
 
                 # Print Encoding duration and Compression Rate metrics to 
                 # output file
-                output_file.write(f"Encoded:\n '{line}'\n to:\n {encoded}\n")
+                output_file.write(f"Encoded:\n '{line}'\n to:\n {encoded['message']}\n")
                 output_file.write(f"Duration: {duration:.4f} milliseconds\n")
                 output_file.write(f"Compression Rate: " 
                                   f"{compression_rate:.2f}%\n\n")
@@ -139,6 +140,7 @@ def main():
                 end_time = perf_counter()
 
                 if decoded['valid'] is False:
+                    output_file.write(f'Input: "{line}"\n')
                     output_file.write(decoded['message'])
                     continue
 
@@ -162,7 +164,7 @@ def main():
 
                 # Print Decoding duration and Decompression Rate metrics to 
                 # output file
-                output_file.write(f"Decoded:\n '{line}'\n to:\n {decoded}\n")
+                output_file.write(f"Decoded:\n '{line}'\n to:\n {decoded['message']}\n")
                 output_file.write(f"Duration: {duration:.4f} milliseconds\n")
                 output_file.write(f"Decompression (Expansion) Rate: "+ 
                                   f"{decompression_rate:.2f}%\n\n")
