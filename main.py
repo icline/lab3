@@ -4,11 +4,16 @@ from time import perf_counter
 
 # Main function
 def main():
+
+    def _print_table(data):
+        for row in data:
+            output_file.write("{:<15} {:<5}".format(*row))
     # Define letters with corresponding frequencies by index in lists
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
                'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     frequencies = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19,
                    24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
+    max_width = 80
 
     # Create Huffman Tree instance, build the tree, create the coding
     # dictionary, and create a Huffman Coder instance that will encode and
@@ -34,6 +39,35 @@ def main():
     # Open input and output files for reading and writing, respectively
     with open('input.txt', 'r') as input_file, \
         open('output.txt', 'w') as output_file:
+
+        # Print Huffman Tree (pre-order traversal)
+        output_file.write(f'The tree in preorder is: \n')
+        nodes = tree.print_preorder_traversal(root)
+        current_line = ""
+        for i in range(len(nodes)):
+            if i != len(nodes) - 1:
+                output_file.write(f'{nodes[i]}, ')
+                current_line += f'{nodes[i]}, '
+            else:
+                output_file.write(f'{nodes[i]}')
+
+            if len(current_line) >= max_width:
+                output_file.write('\n')
+                current_line = ""
+        output_file.write('\n---------------------------------------------\n')
+
+        # Print the Codes Generated from the Huffman Tree
+        current_line = ""
+        output_file.write(f'The code is: \n')
+        for char,code in code_dict.items():
+            output_file.write(f'{char:>8}: {code:>2}, ')
+            current_line += f'{char:>8}: {code:>2}, '
+
+            if len(current_line) >= max_width:
+                output_file.write('\n')
+                current_line = ""
+        output_file.write('\n---------------------------------------------\n')
+
 
         # Read and process each line from input file
         for line in input_file:
@@ -67,7 +101,9 @@ def main():
                 encoded = coder.encode(line)
                 end_time = perf_counter()
 
-                if encoded is None:
+
+                if encoded['valid'] is False:
+                    output_file.write(encoded['message'])
                     continue
 
                 # Calculate encoding time duration in milliseconds
@@ -102,7 +138,8 @@ def main():
                 decoded = coder.decode(line)
                 end_time = perf_counter()
 
-                if decoded is None:
+                if decoded['valid'] is False:
+                    output_file.write(decoded['message'])
                     continue
 
                 # Calculate decoding duration for line

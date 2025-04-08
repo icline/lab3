@@ -1,37 +1,54 @@
+The tree in preorder is: 
+MLKJVWEDFNRTPGZQXYUBICHSOA: 413, MLKJVWEDFN: 169, MLKJVW: 80, ML: 39, M: 19, L: 20, 
+KJVW: 41, KJV: 20, K: 10, JV: 10, J: 5, V: 5, W: 21, EDFN: 89, E: 42, DFN: 47, DF: 23, 
+D: 11, F: 12, N: 24, RTPGZQXYUBICHSOA: 244, RTPGZQXYU: 106, RT: 50, R: 25, T: 25, 
+PGZQXYU: 56, PG: 27, P: 13, G: 14, ZQXYU: 29, ZQXY: 14, ZQX: 6, Z: 3, QX: 3, Q: 1, 
+X: 2, Y: 8, U: 15, BICHSOA: 138, BICH: 66, BI: 32, B: 16, I: 16, CH: 34, C: 17, 
+H: 17, SOA: 72, S: 35, OA: 37, O: 18, A: 19
+---------------------------------------------
+The code is: 
+    0000:  M,     0001:  L,    00100:  K,   001010:  J,   001011:  V,     0011:  W, 
+     010:  E,    01100:  D,    01101:  F,     0111:  N,     1000:  R,     1001:  T, 
+   10100:  P,    10101:  G,  1011000:  Z, 10110010:  Q, 10110011:  X,   101101:  Y, 
+   10111:  U,    11000:  B,    11001:  I,    11010:  C,    11011:  H,     1110:  S, 
+   11110:  O,    11111:  A, 
+---------------------------------------------
 Encoded:
  'Sally sells seashells by the seashore.'
  to:
- 11101111100010001101101111001000010001111011100101111111101101101000010001111011000101101100111011010111001011111111011011111101000010
-Duration: 0.1377 milliseconds
-Compression Rate: 44.08%
+ {'valid': True, 'message': '11101111100010001101101111001000010001111011100101111111101101101000010001111011000101101100111011010111001011111111011011111101000010'}
+Duration: 0.1049 milliseconds
+Compression Rate: 0.66%
 
 Encoded:
  'Peter Piper picked a peck of pickled peppers a peck of pickled peppers Peter Piper picked.'
  to:
- 10100010100101010001010011001101000101000101001100111010001000100110011111101000101101000100111100110110100110011101000100000101001100101000101010010100010100011101111110100010110100010011110011011010011001110100010000010100110010100010101001010001010001110101000101001010100010100110011010001010001010011001110100010001001100
-Duration: 0.0435 milliseconds
-Compression Rate: 45.28%
+ {'valid': True, 'message': '10100010100101010001010011001101000101000101001100111010001000100110011111101000101101000100111100110110100110011101000100000101001100101000101010010100010100011101111110100010110100010011110011011010011001110100010000010100110010100010101001010001010001110101000101001010100010100110011010001010001010011001110100010001001100'}
+Duration: 0.0500 milliseconds
+Compression Rate: 0.28%
 
 Encoded:
  'Houston, the Eagle has landed.'
  to:
- 11011111101011111101001111100111100111011010010111111010100010101101111111111000011111101110110001001100
-Duration: 0.0214 milliseconds
-Compression Rate: 43.33%
+ {'valid': True, 'message': '11011111101011111101001111100111100111011010010111111010100010101101111111111000011111101110110001001100'}
+Duration: 0.0181 milliseconds
+Compression Rate: 0.83%
 
 Encoded:
  'Is that your final answer?'
  to:
- 1100111101001110111111110011011011111010111100001101110010111111110001111110111111000110101000
-Duration: 0.0147 milliseconds
-Compression Rate: 45.19%
+ {'valid': True, 'message': '1100111101001110111111110011011011111010111100001101110010111111110001111110111111000110101000'}
+Duration: 0.0150 milliseconds
+Compression Rate: 0.96%
+
+Error: No valid letters in input to encode.
 
 Decoded:
  '01011001010110011111011011'
  to:
- EIEIOH
-Duration: 0.0196 milliseconds
-Decompression (Expansion) Rate: 184.62%
+ {'valid': True, 'message': 'EIEIOH'}
+Duration: 0.0120 milliseconds
+Decompression (Expansion) Rate: 61.54%
 
 Error: Line 'a1' has invalid characters
 
@@ -39,29 +56,45 @@ Error: Line '345' has invalid characters
 
 Error: Line 'sally3ft4&' has invalid characters
 
+Error: No valid letters in input to encode.
+
+Error: No valid letters in input to encode.
+
+Error: No valid letters in input to encode.
+
 Decoded:
  '10110000101010011011101101100010110010101100010111000110111'
  to:
- ZEPHYRQZULU
-Duration: 0.0157 milliseconds
-Decompression (Expansion) Rate: 149.15%
+ {'valid': True, 'message': 'ZEPHYRQZULU'}
+Duration: 0.0148 milliseconds
+Decompression (Expansion) Rate: 27.12%
+
+Error: No valid letters in input to encode.
+
+No match found. Decoding stopped.
+
+Error: No valid letters in input to encode.
+
+No match found. Decoding stopped.
+
+Error: No valid letters in input to encode.
 
 Decoded:
  '11111110001000111111101011111011001111111000100011111000001010000001110010111'
  to:
- ABRACADABRAMERLIN
-Duration: 0.0177 milliseconds
-Decompression (Expansion) Rate: 176.62%
+ {'valid': True, 'message': 'ABRACADABRAMERLIN'}
+Duration: 0.0159 milliseconds
+Decompression (Expansion) Rate: 20.78%
 
 Total Original Bytes to Encode: 184
 Total Original Bits to Encode: 1472
-Total Compressed Bits: 658
-Overall Compression Rate: 44.70%
+Total Compressed Bits: 8
+Overall Compression Rate: 0.54%
 
 Total Original Bits to Decode: 162
-Total Final Decompressed Bytes: 34
-Total Final Decompressed Bits: 272
-Overall Decompression (Expansion) Rate: 167.90%
+Total Final Decompressed Bytes: 6
+Total Final Decompressed Bits: 48
+Overall Decompression (Expansion) Rate: 29.63%
 
-Total Program Duration: 0.2703 milliseconds
+Total Program Duration: 0.2309 milliseconds
 
