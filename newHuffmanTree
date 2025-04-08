@@ -1,0 +1,27 @@
+def __lt__(self, other):
+    """
+    Modified comparison protocol for priority queue ordering.
+    
+    This protocol uses multiple factors to determine node priority:
+    1. First prioritize by character length (shorter strings first)
+    2. Then by frequency (lower frequencies first)
+    3. If both are equal, compare the first character alphabetically
+    4. Finally consider the tree height (balance factor)
+    
+    This results in a different tree structure than the standard implementation.
+    """
+    # First prioritize by character length (encourages grouping single characters)
+    if len(self.char) != len(other.char):
+        return len(self.char) < len(other.char)
+    
+    # Then by frequency (standard Huffman behavior)
+    if self.freq != other.freq:
+        return self.freq < other.freq
+    
+    # If lengths and frequencies are equal, compare alphabetically to ensure deterministic behavior
+    # Consider only the first character in each string for comparison
+    if self.char and other.char:
+        return self.char[0].lower() < other.char[0].lower()
+    
+    # As a final tiebreaker, prefer shorter trees to create more balanced trees
+    return self.height < other.height
