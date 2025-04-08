@@ -72,7 +72,7 @@ def main():
         # Read and process each line from input file
         for line in input_file:
             # Skip blank lines        
-            if not line:
+            if not line or line == "\n":
                 continue           
             # Strip white spaces in line
             line = line.strip()
@@ -90,8 +90,9 @@ def main():
             is_binary = all(char in '01' for char in line)
 
             if not (is_alphabetic or is_binary):
-                output_file.write(f"Error: Line '{line}' has invalid "
-                                  f"characters\n\n")
+                output_file.write(f'Input: {line}\n')
+                output_file.write(f"Error: Invalid characters\n")
+                output_file.write('\n---------------------------------------------\n')
                 continue
 
             # Encode if line is alphabetic
@@ -105,6 +106,7 @@ def main():
                 if encoded['valid'] is False:
                     output_file.write(f'Input: "{line}"\n')
                     output_file.write(encoded['message'])
+                    output_file.write('\n---------------------------------------------\n')
                     continue
 
                 # Calculate encoding time duration in milliseconds
@@ -130,7 +132,8 @@ def main():
                 output_file.write(f"Encoded:\n '{line}'\n to:\n {encoded['message']}\n")
                 output_file.write(f"Duration: {duration:.4f} milliseconds\n")
                 output_file.write(f"Compression Rate: " 
-                                  f"{compression_rate:.2f}%\n\n")
+                                  f"{compression_rate:.2f}%\n")
+                output_file.write('\n---------------------------------------------\n')
 
             # Decode if line consists of valid binary codes            
             else:
@@ -142,6 +145,7 @@ def main():
                 if decoded['valid'] is False:
                     output_file.write(f'Input: "{line}"\n')
                     output_file.write(decoded['message'])
+                    output_file.write('\n---------------------------------------------\n')
                     continue
 
                 # Calculate decoding duration for line
@@ -167,7 +171,8 @@ def main():
                 output_file.write(f"Decoded:\n '{line}'\n to:\n {decoded['message']}\n")
                 output_file.write(f"Duration: {duration:.4f} milliseconds\n")
                 output_file.write(f"Decompression (Expansion) Rate: "+ 
-                                  f"{decompression_rate:.2f}%\n\n")
+                                  f"{decompression_rate:.2f}%\n")
+                output_file.write('\n---------------------------------------------\n')
 
         # Calculate Overall Compression Rate for lines requiring encoding
         overall_compression_rate = (total_compressed_bits / 

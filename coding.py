@@ -41,15 +41,14 @@ class HuffmanCoder:
 
         while start_index < max_index:
             for length in range(1, max_index - start_index + 1):
-                substring = data[start_index:start_index + length]
-
+                substring = data[start_index:start_index + length]  
                 if substring in self.huffman_codes:
                     result += self.huffman_codes[substring]
                     start_index += length
                     break
             else:
-                return self.error_handler.response(False, f"No match found. Decoding stopped.\n\n")
-
+                return self.error_handler.response(False, f"Unrecognized Huffman sequence. Decoding stopped.\n")
+        
         return self.error_handler.response(True, result)
 
     def encode(self, input_string):
@@ -58,7 +57,7 @@ class HuffmanCoder:
         cleaned_input = self.error_handler.keep_only_letters(cleaned_input.upper())
 
         if not cleaned_input:
-            return self.error_handler.response(False, "Error: No valid letters in input to encode.\n\n")
+            return self.error_handler.response(False, "Error: No valid letters in input to encode.\n")
 
         result = ""
         for char in cleaned_input:
