@@ -3,24 +3,16 @@ import coding
 from time import perf_counter
 
 # Main function
-def main():
-
-    def _print_table(data):
-        for row in data:
-            output_file.write("{:<15} {:<5}".format(*row))
-    # Define letters with corresponding frequencies by index in lists
-    letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-               'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    frequencies = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19,
-                   24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
-    max_width = 80
+def main(letters, frequencies, output_file):
 
     # Create Huffman Tree instance, build the tree, create the coding
     # dictionary, and create a Huffman Coder instance that will encode and
     # decode using the coder the character-frequency dictionary mapping 
     # provided
     tree = HuffmanTree.HuffmanTree(letters, frequencies)
+    build_start_time = perf_counter()
     root = tree.build_huffman_tree()
+    build_stop_time = perf_counter()
     code_dict = tree.get_codes_dict(root)
     coder = coding.HuffmanCoder(code_dict)
 
@@ -29,20 +21,20 @@ def main():
 
     # Track Duration, Compression and Decompression metrics for the 
     # entire program.
-    # Maintain stats separately for compression and decompression.
     total_duration = 0.0
     total_enc_bits = 0
     total_compressed_bits = 0
     total_dec_bits = 0
     total_decompressed_bits = 0
 
-    # Open input and output files for reading and writing, respectively
-    with open('input.txt', 'r') as input_file, \
-        open('output.txt', 'w') as output_file:
-
+    # Open input file for reading
+    with open('input.txt', 'r') as input_file:
         # Print Huffman Tree (pre-order traversal)
         output_file.write(f'The tree in preorder is: \n')
+        start_time = perf_counter()
         nodes = tree.print_preorder_traversal(root)
+        stop_time = perf_counter()
+        max_width = 80
         current_line = ""
         for i in range(len(nodes)):
             if i != len(nodes) - 1:
@@ -54,7 +46,13 @@ def main():
             if len(current_line) >= max_width:
                 output_file.write('\n')
                 current_line = ""
-        output_file.write('\n---------------------------------------------\n')
+
+        traverse_duration = (stop_time - start_time) * 1000
+        build_duration = (build_stop_time - build_start_time) * 1000
+        output_file.write('\n\n')
+        output_file.write(f'Tree Traversal Duration: {traverse_duration:.4f} ms\n')
+        output_file.write(f'Build Tree Duration: {build_duration:.4f} ms\n')
+        output_file.write('---------------------------------------------\n')
 
         # Print the Codes Generated from the Huffman Tree
         current_line = ""
@@ -68,8 +66,8 @@ def main():
                 current_line = ""
         output_file.write('\n---------------------------------------------\n')
 
-
         # Read and process each line from input file
+        encoded_count = decoded_count = 0
         for line in input_file:
             # Skip blank lines        
             if not line or line == "\n":
@@ -102,7 +100,6 @@ def main():
                 encoded = coder.encode(line)
                 end_time = perf_counter()
 
-
                 if encoded['valid'] is False:
                     output_file.write(f'Input: "{line}"\n')
                     output_file.write(encoded['message'])
@@ -117,12 +114,22 @@ def main():
 
                 '''
                 Calculate Encoding Compression Rate: 
-                Number of original bits (8 bits per character) divided by 
+                Number of original bits (5 bits per character) divided by 
                 Number of post-encoded compressed bits
+
+                    - Since we are only generating codes for the letters in the alphabet,
+                    5 bits is the minimum necessary to code the 26 letters. In essence,
+                    using standard methods, the code lengths of each letter would be fixed
+                    at 5. However, Huffman encoding generates variable length codes that
+                    will reduce the length of the encoded string.
+                
+                Compression Rate Formula Reference: 
+                `A Comparison of Huffman Codes Across Ian 
+                <https://jhu.instructure.com/courses/93679/pages/module-8-huffman-tree-review-article?module_item_id=4291887>`_
                 '''
-                original_enc_bits = len(line) * 8  
-                compressed_bits = len(encoded)
-                compression_rate = (compressed_bits/original_enc_bits) * 100 
+                original_enc_bits = len(line) * 5
+                compressed_bits = len(encoded['message'])
+                compression_rate = (1 - (compressed_bits/original_enc_bits)) * 100 
 
                 total_enc_bits += original_enc_bits
                 total_compressed_bits += compressed_bits
@@ -134,6 +141,7 @@ def main():
                 output_file.write(f"Compression Rate: " 
                                   f"{compression_rate:.2f}%\n")
                 output_file.write('\n---------------------------------------------\n')
+                encoded_count += 1
 
             # Decode if line consists of valid binary codes            
             else:
@@ -155,13 +163,13 @@ def main():
 
                 '''
                 Calculate Decoding Decompression (Expansion) Rate: 
-                Number of decompressed bits (num characters * 8) divided by 
+                Number of decompressed bits (num characters * 5) divided by 
                 Number of original bits in binary codes line
                 '''
                 original_dec_bits = len(line)
-                final_dec_bits = len(decoded) * 8
-                decompression_rate = (final_dec_bits / 
-                                      original_dec_bits) * 100 
+                final_dec_bits = len(decoded) * 5
+                decompression_rate = (1- (final_dec_bits / 
+                                      original_dec_bits)) * 100 
 
                 total_dec_bits += original_dec_bits
                 total_decompressed_bits += final_dec_bits
@@ -173,6 +181,7 @@ def main():
                 output_file.write(f"Decompression (Expansion) Rate: "+ 
                                   f"{decompression_rate:.2f}%\n")
                 output_file.write('\n---------------------------------------------\n')
+                decoded_count += 1
 
         # Calculate Overall Compression Rate for lines requiring encoding
         overall_compression_rate = (total_compressed_bits / 
@@ -200,7 +209,37 @@ def main():
 
         # Print total duration of program 
         output_file.write(f"Total Program Duration: " + 
-                          f"{total_duration:.4f} milliseconds\n\n")        
+                          f"{total_duration:.4f} milliseconds\n\n")
+        
+        # Print total number of lines processed:
+        total_lines_processed = encoded_count + decoded_count
+        output_file.write(f'Total Number of Lines Processed: {total_lines_processed}\n'
+                          f'    - Lines Encoded: {encoded_count}\n'
+                          f'    - Lines Decoded: {decoded_count}\n')
+        input_file.close()
 
 if __name__ == "__main__":
-    main()
+    # Define two sets of letters and frequencies
+    letters_1 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    frequencies_1 = [19, 16, 17, 11, 42, 12, 14, 17, 16, 5, 10, 20, 19,
+                     24, 18, 13, 1, 25, 35, 25, 15, 5, 21, 2, 8, 3]
+    
+    letters_2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    frequencies_2 = [10, 20, 30, 15, 25, 10, 35, 20, 18, 11, 16, 17, 14,
+                     22, 19, 28, 24, 16, 20, 11, 23, 12, 13, 15, 10, 9]
+
+    # Open output file in append mode to keep results from both runs
+    with open('output.txt', 'w') as output_file:
+        # Loop through each pair of letters and frequencies and call the main function
+        i = 1
+        for letters, frequencies in [(letters_1, frequencies_1), (letters_2, frequencies_2)]:
+            # Write a separator between runs
+            output_file.write("\n-------------------------------------------------------------------------------\n")
+            output_file.write(f'Frequency Table: {i}\n')
+            output_file.write(f"Letters: {letters}\n")
+            output_file.write(f"Frequencies: {frequencies}\n\n")
+            main(letters, frequencies, output_file)
+            i+=1
+    output_file.close()
