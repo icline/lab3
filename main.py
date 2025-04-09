@@ -208,8 +208,8 @@ def main(letters, frequencies, output_file):
                           f"{overall_compression_rate:.2f}%\n\n")
 
         # Calculate Overall Decompression Rate for lines requiring decoding       
-        overall_decompression_rate = (1 - (total_decompressed_bits / 
-                                      total_dec_bits)) * 100 
+        overall_decompression_rate = (total_decompressed_bits / 
+                                      total_dec_bits) * 100 
         # Print overall decompression statistics for decoding        
         output_file.write(f"Total Original Bits for Decoding: " 
                           f"{total_dec_bits}\n")
