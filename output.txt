@@ -12,8 +12,8 @@ PGZQXYU: 56, PG: 27, P: 13, G: 14, ZQXYU: 29, ZQXY: 14, ZQX: 6, Z: 3, QX: 3, Q: 
 X: 2, Y: 8, U: 15, BICHSOA: 138, BICH: 66, BI: 32, B: 16, I: 16, CH: 34, C: 17, 
 H: 17, SOA: 72, S: 35, OA: 37, O: 18, A: 19
 
-Tree Traversal Duration: 0.0304 ms
-Build Tree Duration: 0.3290 ms
+Tree Traversal Duration: 0.0165 ms
+Build Tree Duration: 0.2571 ms
 ---------------------------------------------
 The code is: 
     0000:  M,     0001:  L,    00100:  K,   001010:  J,   001011:  V,     0011:  W, 
@@ -26,7 +26,7 @@ Encoded:
  'Sally sells seashells by the seashore.'
  to:
  11101111100010001101101111001000010001111011100101111111101101101000010001111011000101101100111011010111001011111111011011111101000010
-Duration: 0.1127 milliseconds
+Duration: 0.1018 milliseconds
 Compression Rate: 29.47%
 
 ---------------------------------------------
@@ -34,7 +34,7 @@ Encoded:
  'Peter Piper picked a peck of pickled peppers a peck of pickled peppers Peter Piper picked.'
  to:
  10100010100101010001010011001101000101000101001100111010001000100110011111101000101101000100111100110110100110011101000100000101001100101000101010010100010100011101111110100010110100010011110011011010011001110100010000010100110010100010101001010001010001110101000101001010100010100110011010001010001010011001110100010001001100
-Duration: 0.0453 milliseconds
+Duration: 0.0446 milliseconds
 Compression Rate: 27.56%
 
 ---------------------------------------------
@@ -42,7 +42,7 @@ Encoded:
  'Houston, the Eagle has landed.'
  to:
  11011111101011111101001111100111100111011010010111111010100010101101111111111000011111101110110001001100
-Duration: 0.0183 milliseconds
+Duration: 0.0177 milliseconds
 Compression Rate: 30.67%
 
 ---------------------------------------------
@@ -50,7 +50,7 @@ Encoded:
  'Is that your final answer?'
  to:
  1100111101001110111111110011011011111010111100001101110010111111110001111110111111000110101000
-Duration: 0.0154 milliseconds
+Duration: 0.0151 milliseconds
 Compression Rate: 27.69%
 
 ---------------------------------------------
@@ -58,8 +58,8 @@ Decoded:
  '01011001010110011111011011'
  to:
  EIEIOH
-Duration: 0.0127 milliseconds
-Decompression Rate: 61.54%
+Duration: 0.0123 milliseconds
+Decompression Rate: 115.38%
 
 ---------------------------------------------
 Input: a1
@@ -78,8 +78,8 @@ Decoded:
  '10110000101010011011101101100010110010101100010111000110111'
  to:
  ZEPHYRQZULU
-Duration: 0.0148 milliseconds
-Decompression Rate: 83.05%
+Duration: 0.0149 milliseconds
+Decompression Rate: 93.22%
 
 ---------------------------------------------
 Input: "1111111101101000001010"
@@ -94,24 +94,24 @@ Decoded:
  '11111110001000111111101011111011001111111000100011111000001010000001110010111'
  to:
  ABRACADABRAMERLIN
-Duration: 0.0172 milliseconds
-Decompression Rate: 87.01%
+Duration: 0.0158 milliseconds
+Decompression Rate: 110.39%
 
 ---------------------------------------------
 Decoded:
  '11010111111001'
  to:
  CAT
-Duration: 0.0045 milliseconds
-Decompression Rate: 28.57%
+Duration: 0.0038 milliseconds
+Decompression Rate: 107.14%
 
 ---------------------------------------------
 Decoded:
  '0110011111100111111'
  to:
  DATA
-Duration: 0.0055 milliseconds
-Decompression Rate: 47.37%
+Duration: 0.0047 milliseconds
+Decompression Rate: 105.26%
 
 ---------------------------------------------
 Input: "0110011111100111101"
@@ -122,32 +122,32 @@ Decoded:
  '1010011110100010011100111111'
  to:
  PORTIA
-Duration: 0.0067 milliseconds
-Decompression Rate: 64.29%
+Duration: 0.0062 milliseconds
+Decompression Rate: 107.14%
 
 ---------------------------------------------
 Decoded:
  '11001111011111110000100001000111111'
  to:
  ISABELLA
-Duration: 0.0082 milliseconds
-Decompression Rate: 71.43%
+Duration: 0.0076 milliseconds
+Decompression Rate: 114.29%
 
 ---------------------------------------------
 Decoded:
  '001001000110011110100111001011111111'
  to:
  KRISTINA
-Duration: 0.0087 milliseconds
-Decompression Rate: 72.22%
+Duration: 0.0078 milliseconds
+Decompression Rate: 111.11%
 
 ---------------------------------------------
 Decoded:
  '101011000111110100000010'
  to:
  GRAEME
-Duration: 0.0071 milliseconds
-Decompression Rate: 58.33%
+Duration: 0.0060 milliseconds
+Decompression Rate: 125.00%
 
 ---------------------------------------------
 Total Original Letters for Encoding: 184
@@ -156,11 +156,11 @@ Total Compressed Bits: 658
 Overall Compression Rate: 28.48%
 
 Total Original Bits for Decoding: 318
-Total Final Decompressed Letters: 18
-Total Final Decompressed Bits: 90
-Overall Decompression Rate: 71.70%
+Total Final Decompressed Letters: 69
+Total Final Decompressed Bits: 345
+Overall Decompression Rate: -8.49%
 
-Total Program Duration: 0.2769 milliseconds
+Total Program Duration: 0.2584 milliseconds
 
 Total Number of Lines Processed: 13
     - Lines Encoded: 4
@@ -179,8 +179,8 @@ MDC: 59, MD: 29, M: 14, D: 15, C: 30, XKRL: 64, XK: 31, X: 15, K: 16, RL: 33, R:
 L: 17, GIOZABHS: 151, GIO: 72, G: 35, IO: 37, I: 18, O: 19, ZABHS: 79, ZAB: 39, 
 ZA: 19, Z: 9, A: 10, B: 20, HS: 40, H: 20, S: 20
 
-Tree Traversal Duration: 0.0381 ms
-Build Tree Duration: 0.1678 ms
+Tree Traversal Duration: 0.0142 ms
+Build Tree Duration: 0.1620 ms
 ---------------------------------------------
 The code is: 
    00000:  F,    00001:  Y,     0001:  N,    00100:  J,    00101:  T,     0011:  U, 
@@ -193,7 +193,7 @@ Encoded:
  'Sally sells seashells by the seashore.'
  to:
  1111111100110111101110000111111010110111101111111111111010111100111111111100101101111011111111111010000100101111100101111110101111001111111111011011101100101
-Duration: 0.0321 milliseconds
+Duration: 0.0317 milliseconds
 Compression Rate: 17.37%
 
 ---------------------------------------------
@@ -201,7 +201,7 @@ Encoded:
  'Peter Piper picked a peck of pickled peppers a peck of pickled peppers Peter Piper picked.'
  to:
  01110101001010101101100111110100111010110110011111010100110101010110001111001011101011001101011101100000011111010100110101101110101100010111010101110111010110110111111110010111010110011010111011000000111110101001101011011101011000101110101011101110101101101111101110101001010101101100111110100111010110110011111010100110101010110001
-Duration: 0.0445 milliseconds
+Duration: 0.0602 milliseconds
 Compression Rate: 26.22%
 
 ---------------------------------------------
@@ -209,7 +209,7 @@ Encoded:
  'Houston, the Eagle has landed.'
  to:
  1111011011001111111001011101100010010111110010101011110011100101110101111101110011111110111111001000110001010110001
-Duration: 0.0175 milliseconds
+Duration: 0.0185 milliseconds
 Compression Rate: 23.33%
 
 ---------------------------------------------
@@ -217,7 +217,7 @@ Encoded:
  'Is that your final answer?'
  to:
  11010111110010111110111001001010000111011001110110000001101000011110011011111100100011111101101010110110
-Duration: 0.0147 milliseconds
+Duration: 0.0148 milliseconds
 Compression Rate: 20.00%
 
 ---------------------------------------------
@@ -225,8 +225,8 @@ Decoded:
  '01011001010110011111011011'
  to:
  ECECHO
-Duration: 0.0101 milliseconds
-Decompression Rate: 61.54%
+Duration: 0.0095 milliseconds
+Decompression Rate: 115.38%
 
 ---------------------------------------------
 Input: a1
@@ -245,8 +245,8 @@ Decoded:
  '10110000101010011011101101100010110010101100010111000110111'
  to:
  RNEUPWDVKDPNL
-Duration: 0.0266 milliseconds
-Decompression Rate: 83.05%
+Duration: 0.0227 milliseconds
+Decompression Rate: 110.17%
 
 ---------------------------------------------
 Input: "1111111101101000001010"
@@ -257,48 +257,48 @@ Decoded:
  '10010111111000'
  to:
  CPZ
-Duration: 0.0067 milliseconds
-Decompression Rate: 28.57%
+Duration: 0.0045 milliseconds
+Decompression Rate: 107.14%
 
 ---------------------------------------------
 Decoded:
  '11111110001000111111101011111011001111111000100011111000001010000001110010111'
  to:
  SGQPHLOUSNNHYQYGL
-Duration: 0.0159 milliseconds
-Decompression Rate: 87.01%
+Duration: 0.0160 milliseconds
+Decompression Rate: 110.39%
 
 ---------------------------------------------
 Decoded:
  '11010111111001'
  to:
  ISC
-Duration: 0.0039 milliseconds
-Decompression Rate: 28.57%
+Duration: 0.0041 milliseconds
+Decompression Rate: 107.14%
 
 ---------------------------------------------
 Decoded:
  '0110011111100111111'
  to:
  VSCS
-Duration: 0.0046 milliseconds
-Decompression Rate: 47.37%
+Duration: 0.0052 milliseconds
+Decompression Rate: 105.26%
 
 ---------------------------------------------
 Decoded:
  '0110011111100111101'
  to:
  VSCB
-Duration: 0.0044 milliseconds
-Decompression Rate: 47.37%
+Duration: 0.0049 milliseconds
+Decompression Rate: 105.26%
 
 ---------------------------------------------
 Decoded:
  '1010011110100010011100111111'
  to:
  XHDUCS
-Duration: 0.0061 milliseconds
-Decompression Rate: 64.29%
+Duration: 0.0062 milliseconds
+Decompression Rate: 107.14%
 
 ---------------------------------------------
 Input: "11001111011111110000100001000111111"
@@ -309,8 +309,8 @@ Decoded:
  '001001000110011110100111001011111111'
  to:
  JDCBUCPS
-Duration: 0.0077 milliseconds
-Decompression Rate: 72.22%
+Duration: 0.0078 milliseconds
+Decompression Rate: 111.11%
 
 ---------------------------------------------
 Input: "101011000111110100000010"
@@ -323,11 +323,11 @@ Total Compressed Bits: 708
 Overall Compression Rate: 23.04%
 
 Total Original Bits for Decoding: 292
-Total Final Decompressed Letters: 18
-Total Final Decompressed Bits: 90
-Overall Decompression Rate: 69.18%
+Total Final Decompressed Letters: 64
+Total Final Decompressed Bits: 320
+Overall Decompression Rate: -9.59%
 
-Total Program Duration: 0.1947 milliseconds
+Total Program Duration: 0.2062 milliseconds
 
 Total Number of Lines Processed: 13
     - Lines Encoded: 4

@@ -176,10 +176,10 @@ def main(letters, frequencies, output_file):
                 Number of decompressed bits (num characters * 5) divided by 
                 Number of original bits in binary codes line
                 '''
+                
                 original_dec_bits = len(line)
-                final_dec_bits = len(decoded) * 5
-                decompression_rate = (1- (final_dec_bits / 
-                                      original_dec_bits)) * 100 
+                final_dec_bits = len(decoded['message']) * 5
+                decompression_rate = (final_dec_bits / original_dec_bits) * 100
 
                 total_dec_bits += original_dec_bits
                 total_decompressed_bits += final_dec_bits
